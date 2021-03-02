@@ -25,12 +25,40 @@ class App extends React.Component {
     });
   };
 
+  sortByName = () => {
+    const clonedArray = [...this.state.contactArray];
+    clonedArray.sort((a, b) => {
+      return a.name - b.name;
+    });
+    console.log(clonedArray);
+    this.setState({
+      contactArray: clonedArray,
+    });
+  };
+
+  sortByPopularity = () => {
+    const clonedArray = [...this.state.contactArray];
+    clonedArray.sort((a, b) => {
+      return a.popularity + b.popularity;
+    });
+    console.log(clonedArray);
+    this.setState({
+      contactArray: clonedArray,
+    });
+  };
+
   render() {
     return (
       <div className="IronContact">
         <h1 className="header">IronContacts</h1>
         <button id="add-random-contact" onClick={this.addContact}>
           Add New Contact
+        </button>
+        <button id="sort-by-name" onClick={this.sortByName}>
+          Sort by name
+        </button>
+        <button id="sort-by-popularity" onClick={this.sortByPopularity}>
+          Sort by popularity
         </button>
         <div className="table">
           <table>
