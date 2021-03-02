@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.table {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.table tr,
+.table td {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.contact-picture {
+  width: 5em;
+  height: 5em;
+  object-fit: cover;
+}
