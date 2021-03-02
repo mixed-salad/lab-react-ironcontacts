@@ -8,22 +8,38 @@ class App extends React.Component {
     super();
 
     this.state = {
-      sampleArray: contacts.slice(0, 5),
+      contactArray: contacts.slice(0, 5),
     };
   }
+
+  addContact = () => {
+    const randomIndex = Math.floor(Math.random() * contacts.length);
+    const clonedArray = [...this.state.contactArray];
+    const personAdded = contacts[randomIndex];
+    if (!clonedArray.includes(personAdded)) {
+      // if not, push into the new array
+      clonedArray.push(personAdded);
+    }
+    this.setState({
+      contactArray: clonedArray,
+    });
+  };
 
   render() {
     return (
       <div className="IronContact">
-        <h1>IronContacts</h1>
+        <h1 className="header">IronContacts</h1>
+        <button id="add-random-contact" onClick={this.addContact}>
+          Add New Contact
+        </button>
         <div className="table">
           <table>
             <tr>
-              <th>Picture</th>
-              <th>Name</th>
-              <th>Popularity</th>
+              <td>Picture</td>
+              <td>Name</td>
+              <td>Popularity</td>
             </tr>
-            {this.state.sampleArray.map((contact) => {
+            {this.state.contactArray.map((contact) => {
               return (
                 <tr key={contact.id}>
                   <td>
