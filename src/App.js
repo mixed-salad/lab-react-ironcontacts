@@ -28,7 +28,7 @@ class App extends React.Component {
   sortByName = () => {
     const clonedArray = [...this.state.contactArray];
     clonedArray.sort((a, b) => {
-      return a.name - b.name;
+      return a.name.localeCompare(b.name);
     });
     console.log(clonedArray);
     this.setState({
