@@ -30,7 +30,6 @@ class App extends React.Component {
     clonedArray.sort((a, b) => {
       return a.name.localeCompare(b.name);
     });
-    console.log(clonedArray);
     this.setState({
       contactArray: clonedArray,
     });
@@ -39,9 +38,22 @@ class App extends React.Component {
   sortByPopularity = () => {
     const clonedArray = [...this.state.contactArray];
     clonedArray.sort((a, b) => {
-      return a.popularity + b.popularity;
+      return a.popularity - b.popularity;
     });
-    console.log(clonedArray);
+    this.setState({
+      contactArray: clonedArray,
+    });
+  };
+
+  deleteContact = (event) => {
+    const clonedArray = [...this.state.contactArray];
+    console.log(event);
+    const result = clonedArray.find(
+      (contact) => contact.id === event.target.name
+    );
+    const index = clonedArray.indexOf(result);
+    console.log(index);
+    clonedArray.splice(index, 1);
     this.setState({
       contactArray: clonedArray,
     });
@@ -66,6 +78,7 @@ class App extends React.Component {
               <td>Picture</td>
               <td>Name</td>
               <td>Popularity</td>
+              <td>Action</td>
             </tr>
             {this.state.contactArray.map((contact) => {
               return (
@@ -78,6 +91,11 @@ class App extends React.Component {
                   </td>
                   <td>{contact.name}</td>
                   <td>{contact.popularity}</td>
+                  <td>
+                    <button name={contact.id} onClick={this.deleteContact}>
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}
